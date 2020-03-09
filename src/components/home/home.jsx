@@ -50,7 +50,7 @@ function ShowHome() {
     }
 
     const fetchApiData = async () => {
-        let url = `https://en.wikipedia.org/w/api.php?&format=json&origin=*&action=query&generator=geosearch&prop=coordinates|pageimages&piprop=thumbnail&pithumbsize=400&ggscoord=${lat}|${long}&ggsradius=${range * 1000}&ggslimit=50`;
+        let url = `https://en.wikipedia.org/w/api.php?&format=json&origin=*&action=query&generator=geosearch&prop=coordinates|pageimages&piprop=thumbnail&pithumbsize=1000&ggscoord=${lat}|${long}&ggsradius=${range * 1000}&ggslimit=100`;
 
         try {
 
@@ -64,15 +64,15 @@ function ShowHome() {
         }
     }
 
-    function wikiArticle(name, id, img){
+/*     function wikiArticle(name, id, img){
         this.name = name;
         this.id = id;
         this.img = img;
-    }
+    } */
 
 
     // Creates new wikiArticle once fetch is completed
-    const createDataArray = async () => {
+/*     const CreateDataArray = () => {
         let wikiArr = [];
         let data = apiData.query.pages;
         let dataArr = Object.entries(data); 
@@ -81,10 +81,39 @@ function ShowHome() {
             wikiArr.push(new wikiArticle(item[1].title, item[1].pageid, item[1].thumbnail));
             }
         });
-        console.log(wikiArr)
+        console.log(wikiArr);
         console.log(cityName);
-    }
+     
+    } */
 
+
+    const WikiArray = () =>{
+        if (apiData && apiData.query && apiData.query.pages){
+           return Object.entries(apiData.query.pages).reduce((acc, item) => {
+                if (item[1].thumbnail){
+                    acc.push(
+                        <div className={Style.contentContainer} key={item[1].pageid} style={{backgroundImage: `url( ${item[1].thumbnail.source})`}}>
+                        <h2> {item[1].title} </h2>
+                        <a href={"http://en.wikipedia.org/?curid=" + item[1].pageid}>Link her</a>
+                    </div>
+                    )
+                }
+                return acc;
+            }, [])
+        }
+    }
+/* 
+    const wikiArray = (apiData && apiData.query && apiData.query.pages) ? Object.entries(apiData.query.pages).reduce((acc, item) => {
+        
+        if(item[1].thumbnail) {
+            acc.push(
+                <div key={item[1].pageid}>
+                    {item[1].title}
+                </div>
+            )
+        }
+        return acc
+    }, []) : []; */
 
     if (!apiData) {
         return (
@@ -110,9 +139,20 @@ function ShowHome() {
         )
     }
     else {
-        createDataArray();
+        console.log(apiData);
+        //CreateDataArray();
         return (
+            <>
             <div>Fetch completed</div>
+            {/* WikiArray.map(wiki => {
+                return (
+                    <div key={wiki.pageid}>
+                        {wiki.title}
+                    </div>
+                )
+            }) */}
+            {WikiArray()}
+            </>
         )
     }
 
