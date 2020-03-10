@@ -1,0 +1,95 @@
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.topSection {
+  width: 100%;
+  height: 50vh;
+  background-color: #2d66Bd;
+}
+
+.topSection h2 {
+  font-size: 8rem;
+  color: white;
+  margin-left: 45%;
+}
+
+.topSection h4 {
+  font-size: 5rem;
+  color: white;
+  margin-left: 25%;
+}
+
+.topNav {
+  width: 100%;
+  border: solid 1px black;
+  height: 10vh;
+}
+
+.contentContainer {
+  width: 100%;
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.contentHeading {
+  font-size: 4rem;
+  color: white;
+}
+
+.contentNavigator {
+  background-color: rgba(200, 200, 200, 0.4);
+}
+
+.iconRound {
+  width: 50px;
+  height: 50px;
+  border-radius: 100px;
+}
+
+.icon-container {
+  width: 20vw;
+  height: auto;
+  float: right;
+}
+
+.labelLeft {
+  font-size: 1rem;
+  display: inline-block;
+  float: left;
+}
+
+.labelRight {
+  font-size: 1rem;
+  display: inline-block;
+  float: right;
+}
+
+.bottomSection {
+  display: -ms-grid;
+  display: grid;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.bottomRange {
+  width: 50vw;
+  height: 5vh;
+  margin-top: 15%;
+}
+
+.bottomButton {
+  width: 25vw;
+  height: 5vh;
+  background-color: white;
+  color: black;
+  margin: auto;
+  font-size: 1.4rem;
+}
+/*# sourceMappingURL=home.module.css.map */

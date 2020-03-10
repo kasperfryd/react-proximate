@@ -1,5 +1,15 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { render } from '@testing-library/react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+//import { faStar } from '@fortawesome/free-solid-svg-icons'
+import { faStar } from '@fortawesome/free-regular-svg-icons'
+import { faCompass } from '@fortawesome/free-regular-svg-icons'
+import { faBars } from '@fortawesome/free-solid-svg-icons'
+import { faUndo } from '@fortawesome/free-solid-svg-icons'
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
+
+
 import Style from './home.module.scss';
 
 function ShowHome() {
@@ -7,6 +17,7 @@ function ShowHome() {
     const [apiData, setApiData] = useState(null)
     const [range, setRange] = useState(10)
     const [cityName, setCityName] = useState(null)
+    const [active, setActive] = useState(0);
 
     const stateChange = (event) => {
         setRange(event.target.value);
@@ -50,13 +61,14 @@ function ShowHome() {
     }
 
     const fetchApiData = async () => {
-        let url = `https://en.wikipedia.org/w/api.php?&format=json&origin=*&action=query&generator=geosearch&prop=coordinates|pageimages&piprop=thumbnail&pithumbsize=1000&ggscoord=${lat}|${long}&ggsradius=${range * 1000}&ggslimit=100`;
+        let url = `https://en.wikipedia.org/w/api.php?&format=json&origin=*&action=query&generator=geosearch&prop=coordinates|pageimages&piprop=thumbnail&pithumbsize=3000&ggscoord=${lat}|${long}&ggsradius=${range * 1000}&ggslimit=50`;
 
         try {
 
             const req = await fetch(url);
             const res = await req.json();
             setApiData(res);
+            console.log(apiData);
         }
 
         catch (error) {
@@ -87,19 +99,43 @@ function ShowHome() {
     } */
 
 
+    function changeSlide(num){
+        setActive(active + num)
+        console.log(active)
+    }
+
+
     const WikiArray = () =>{
         if (apiData && apiData.query && apiData.query.pages){
            return Object.entries(apiData.query.pages).reduce((acc, item) => {
                 if (item[1].thumbnail){
+                    if(item[1].thumbnail.width >= 2000){
                     acc.push(
                         <div className={Style.contentContainer} key={item[1].pageid} style={{backgroundImage: `url( ${item[1].thumbnail.source})`}}>
-                        <h2> {item[1].title} </h2>
-                        <a href={"http://en.wikipedia.org/?curid=" + item[1].pageid}>Link her</a>
+                        <div className={Style.contentNavigator}> 
+    
+                        <h2 className={Style.contentHeading}> {item[1].title} </h2>
+                        <div className={Style.iconContainer}>
+                        <a className={Style.iconRound}><FontAwesomeIcon className={Style.icon} icon={faStar} /></a>
+                        <a className={Style.iconRound}><FontAwesomeIcon className={Style.icon} icon={faCompass} /></a>
+                        <a className={Style.iconRound}><FontAwesomeIcon className={Style.icon} icon={faBars} /></a>
+                        <a className={Style.iconRound}><FontAwesomeIcon className={Style.icon} icon={faUndo} /></a>
+
+                        </div>
+                        <div className={Style.linkContainer}>     
+                        <a className={Style.aLinkLeft} href={"http://en.wikipedia.org/?curid=" + item[1].pageid}>Read more |</a>
+                        <a className={Style.aLink} href="#"> Get directions</a>
+                        </div>
+                        <a onClick={() => changeSlide(-1)} className={Style.iconRoundLeft}><FontAwesomeIcon className={Style.icon} icon={faArrowLeft} /></a>
+                        <a onClick={() => changeSlide(+1)} className={Style.iconRoundRight}><FontAwesomeIcon className={Style.icon} icon={faArrowRight} /></a>
+
+                        
+                    </div>
                     </div>
                     )
-                }
+                }}
                 return acc;
-            }, [])
+           }, [])
         }
     }
 /* 
@@ -151,7 +187,7 @@ function ShowHome() {
                     </div>
                 )
             }) */}
-            {WikiArray()}
+            {WikiArray()[active]}
             </>
         )
     }
