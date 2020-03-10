@@ -68,7 +68,7 @@ function ShowHome() {
             const req = await fetch(url);
             const res = await req.json();
             setApiData(res);
-            console.log(apiData);
+            //console.log(apiData);
         }
 
         catch (error) {
@@ -100,8 +100,23 @@ function ShowHome() {
 
 
     function changeSlide(num){
-        setActive(active + num)
-        console.log(active)
+
+        if (num === -1){
+           if (active === 0){
+                console.log("Reached the bottom")
+            }
+            else{
+            setActive(active +num)
+            }
+        }
+        if (num === 1){
+            if (active < WikiArray().length -1){
+                setActive(active + num)
+            }
+            else{
+                console.log("Reached the top")
+            }
+        }
     }
 
 
@@ -179,7 +194,6 @@ function ShowHome() {
         //CreateDataArray();
         return (
             <>
-            <div>Fetch completed</div>
             {/* WikiArray.map(wiki => {
                 return (
                     <div key={wiki.pageid}>
