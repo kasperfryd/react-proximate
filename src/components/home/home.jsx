@@ -1,13 +1,11 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { render } from '@testing-library/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-//import { faStar } from '@fortawesome/free-solid-svg-icons'
-import { faStar } from '@fortawesome/free-regular-svg-icons'
-import { faCompass } from '@fortawesome/free-regular-svg-icons'
-import { faBars } from '@fortawesome/free-solid-svg-icons'
-import { faUndo } from '@fortawesome/free-solid-svg-icons'
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
-import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
+import { faStar, faCompass } from '@fortawesome/free-regular-svg-icons'
+import { faBars, faUndo, faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons'
+
+//Modal
+import Modal from "../modal/modal";
+import useModal from '../modal/useModal';
 
 
 import Style from './home.module.scss';
@@ -18,7 +16,10 @@ function ShowHome() {
     const [range, setRange] = useState(10)
     const [cityName, setCityName] = useState(null)
     const [active, setActive] = useState(0);
-
+    
+    // MODAL STATE
+    const {isShowing, toggle, thisId, setId} = useModal();
+    
     const stateChange = (event) => {
         setRange(event.target.value);
         console.log(range);
@@ -49,7 +50,7 @@ function ShowHome() {
     }
 
     const fetchGeoData = async () => {
-        let geoURL = `https://geocode.xyz/${lat},${long}?json=1'`;
+       /*  let geoURL = `https://geocode.xyz/${lat},${long}?json=1'`;
 
         try {
             const georeq = await fetch(geoURL);
@@ -57,11 +58,11 @@ function ShowHome() {
             setCityName(geores);
         } catch (error) {
             console.log(error)
-        }
+        } */
     }
 
     const fetchApiData = async () => {
-        let url = `https://en.wikipedia.org/w/api.php?&format=json&origin=*&action=query&generator=geosearch&prop=coordinates|pageimages&piprop=thumbnail&pithumbsize=3000&ggscoord=${lat}|${long}&ggsradius=${range * 1000}&ggslimit=50`;
+        let url = `https://en.wikipedia.org/w/api.php?&format=json&origin=*&action=query&generator=geosearch&prop=coordinates|pageimages&piprop=thumbnail&pithumbsize=2000&ggscoord=${lat}|${long}&ggsradius=${range * 1000}&ggslimit=50`;
 
         try {
 
@@ -75,29 +76,6 @@ function ShowHome() {
             console.log(error)
         }
     }
-
-/*     function wikiArticle(name, id, img){
-        this.name = name;
-        this.id = id;
-        this.img = img;
-    } */
-
-
-    // Creates new wikiArticle once fetch is completed
-/*     const CreateDataArray = () => {
-        let wikiArr = [];
-        let data = apiData.query.pages;
-        let dataArr = Object.entries(data); 
-        dataArr.map(item => {
-            if (item[1].thumbnail){
-            wikiArr.push(new wikiArticle(item[1].title, item[1].pageid, item[1].thumbnail));
-            }
-        });
-        console.log(wikiArr);
-        console.log(cityName);
-     
-    } */
-
 
     function changeSlide(num){
 
@@ -119,7 +97,6 @@ function ShowHome() {
         }
     }
 
-
     const WikiArray = () =>{
         if (apiData && apiData.query && apiData.query.pages){
            return Object.entries(apiData.query.pages).reduce((acc, item) => {
@@ -128,24 +105,28 @@ function ShowHome() {
                     acc.push(
                         <div className={Style.contentContainer} key={item[1].pageid} style={{backgroundImage: `url( ${item[1].thumbnail.source})`}}>
                         <div className={Style.contentNavigator}> 
-    
                         <h2 className={Style.contentHeading}> {item[1].title} </h2>
                         <div className={Style.iconContainer}>
-                        <a className={Style.iconRound}><FontAwesomeIcon className={Style.icon} icon={faStar} /></a>
-                        <a className={Style.iconRound}><FontAwesomeIcon className={Style.icon} icon={faCompass} /></a>
-                        <a className={Style.iconRound}><FontAwesomeIcon className={Style.icon} icon={faBars} /></a>
-                        <a className={Style.iconRound}><FontAwesomeIcon className={Style.icon} icon={faUndo} /></a>
+                        <div className={Style.iconRound}><FontAwesomeIcon className={Style.icon} icon={faStar} /></div> 
+                        <div className={Style.iconRound}><FontAwesomeIcon className={Style.icon} icon={faCompass} /></div>
+                        <div onClick={() => {toggle(); setId(item[1].pageid); console.log(thisId)}} className={Style.iconRound}>
+                        <FontAwesomeIcon className={Style.icon} icon={faBars} />
+                        <Modal
+                        isShowing={isShowing}
+                        hide={toggle}
+                        id={thisId} // Passing the id to the modal component.. I think??
+                        /></div>
+                        <a href="/" className={Style.iconRound}><FontAwesomeIcon className={Style.icon} icon={faUndo} /></a>
 
                         </div>
                         <div className={Style.linkContainer}>     
                         <a className={Style.aLinkLeft} href={"http://en.wikipedia.org/?curid=" + item[1].pageid}>Read more |</a>
-                        <a className={Style.aLink} href="#"> Get directions</a>
+                        <a className={Style.aLink} href="/"> Get directions</a>
                         </div>
-                        <a onClick={() => changeSlide(-1)} className={Style.iconRoundLeft}><FontAwesomeIcon className={Style.icon} icon={faArrowLeft} /></a>
-                        <a onClick={() => changeSlide(+1)} className={Style.iconRoundRight}><FontAwesomeIcon className={Style.icon} icon={faArrowRight} /></a>
-
-                        
+                        <div onClick={() => changeSlide(-1)} className={Style.iconRoundLeft}><FontAwesomeIcon className={Style.icon} icon={faArrowLeft} /></div>
+                        <div onClick={() => changeSlide(+1)} className={Style.iconRoundRight}><FontAwesomeIcon className={Style.icon} icon={faArrowRight} /></div>
                     </div>
+                    
                     </div>
                     )
                 }}
@@ -153,18 +134,6 @@ function ShowHome() {
            }, [])
         }
     }
-/* 
-    const wikiArray = (apiData && apiData.query && apiData.query.pages) ? Object.entries(apiData.query.pages).reduce((acc, item) => {
-        
-        if(item[1].thumbnail) {
-            acc.push(
-                <div key={item[1].pageid}>
-                    {item[1].title}
-                </div>
-            )
-        }
-        return acc
-    }, []) : []; */
 
     if (!apiData) {
         return (
@@ -190,17 +159,11 @@ function ShowHome() {
         )
     }
     else {
-        console.log(apiData);
+       // console.log(apiData);
         //CreateDataArray();
         return (
             <>
-            {/* WikiArray.map(wiki => {
-                return (
-                    <div key={wiki.pageid}>
-                        {wiki.title}
-                    </div>
-                )
-            }) */}
+ 
             {WikiArray()[active]}
             </>
         )
