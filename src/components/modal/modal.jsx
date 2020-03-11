@@ -5,10 +5,10 @@ import Parse from 'html-react-parser';
 
 
 const Modal = (isShowing, hide, id) => {
- 
-    // This becomes undefined? Why?
-    const [modalContent, setModalContent] = useState(null)   
     // NEED TO PASS ID OF PARENT DIV FROM HOME COMPONENT INTO THIS FUNCTION 
+    // console.log(id) & console.log(thisId) upon import returns undefined?
+
+    const [modalContent, setModalContent] = useState(null)   
     async function fetchModalContent() {
         let url = 'https://en.wikipedia.org/w/api.php?origin=*&format=json&action=query&prop=extracts&exintro&explaintext&redirects=1&titles=Stack%20Overflow'
         try {
