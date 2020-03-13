@@ -9,7 +9,7 @@ const useModal = () => {
     console.log("toggling" + isShowing)
   }
 
-
+  // HER FÅR JEG DET RIGTIGE ID
   function setId(thisId){
     setThisId(thisId)
     console.log(thisId);

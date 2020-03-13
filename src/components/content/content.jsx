@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useState, Component, } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar, faCompass } from '@fortawesome/free-regular-svg-icons'
 import { faBars, faUndo, faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons'
@@ -7,14 +7,13 @@ import { faBars, faUndo, faArrowLeft, faArrowRight } from '@fortawesome/free-sol
 import Modal from "../modal/modal";
 import useModal from '../modal/useModal';
 
+import Style from './content.module.scss';
 
-import Style from './home.module.scss';
-
-function ShowHome() {
+function Content() {
 
     const [apiData, setApiData] = useState(null)
     const [range, setRange] = useState(10)
-    const [cityName, setCityName] = useState(null)
+    //const [cityName, setCityName] = useState(null)
     const [active, setActive] = useState(0);
     
     // MODAL STATE
@@ -39,9 +38,7 @@ function ShowHome() {
     let lat;
     let long;
 
-    if (!cityName) {
-        navigator.geolocation.getCurrentPosition(success, error);
-    }
+    navigator.geolocation.getCurrentPosition(success, error);
 
 
     const fetchAll = () => {
@@ -97,11 +94,12 @@ function ShowHome() {
         }
     }
 
-    const WikiArray = () =>{
+    const WikiArray = (id) =>{
         if (apiData && apiData.query && apiData.query.pages){
            return Object.entries(apiData.query.pages).reduce((acc, item) => {
                 if (item[1].thumbnail){
                     if(item[1].thumbnail.width >= 2000){
+                    let myId = id;
                     acc.push(
                         <div className={Style.contentContainer} key={item[1].pageid} style={{backgroundImage: `url( ${item[1].thumbnail.source})`}}>
                         <div className={Style.contentNavigator}> 
@@ -114,7 +112,7 @@ function ShowHome() {
                         <Modal
                         isShowing={isShowing}
                         hide={toggle}
-                        id={thisId} // Passing the id to the modal component.. I think??
+                        id={myId} // Passing the id to the modal component.. I think??
                         /></div>
                         <a href="/" className={Style.iconRound}><FontAwesomeIcon className={Style.icon} icon={faUndo} /></a>
 
@@ -164,11 +162,11 @@ function ShowHome() {
         return (
             <>
  
-            {WikiArray()[active]}
+            {WikiArray(thisId)[active]}
             </>
         )
     }
 
 }
 
-export default ShowHome;
+export default Content;

@@ -1,37 +1,16 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import modalStyle from '../modal/modal.module.scss'
-import Parse from 'html-react-parser';
+import ModalContent from '../modal/modalContent'
 
 
 const Modal = (isShowing, hide, id) => {
+
+     console.log(id);
     // NEED TO PASS ID OF PARENT DIV FROM HOME COMPONENT INTO THIS FUNCTION 
     // console.log(id) & console.log(thisId) upon import returns undefined?
 
-    const [modalContent, setModalContent] = useState(null)   
-    async function fetchModalContent() {
-        let url = 'https://en.wikipedia.org/w/api.php?origin=*&format=json&action=query&prop=extracts&exintro&explaintext&redirects=1&titles=Stack%20Overflow'
-        try {
-            const req = await fetch(url)
-            const res = await req.json()
-            const converted = await Object.entries(res)[1][1].pages;
-            const newEl = await Object.entries(converted);
-            setModalContent(newEl[0][1].extract);
-        } catch (error) {
-            console.log(error);
-        }
-    }
-    if (modalContent) {
-        //console.log(Parse(modalContent));
-    }
-    
-    if (isShowing.isShowing === true) {
-        console.log(id);
-        if (!modalContent) {
-            fetchModalContent();
-            //console.log(modalContent)
-        }
-        
+    if (isShowing.isShowing){
         return (
             ReactDOM.createPortal(
                 <React.Fragment>
@@ -43,13 +22,14 @@ const Modal = (isShowing, hide, id) => {
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                            {modalContent}
+                            <ModalContent></ModalContent>
                         </div>
                     </div>
                 </React.Fragment>, document.body
             )
         )
-    }
+            }
+
     if (isShowing.isShowing === false) {
         return (
             null
