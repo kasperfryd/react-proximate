@@ -1,40 +1,44 @@
-import React, { useState } from 'react';
-import ReactDOM from 'react-dom';
-import modalStyle from '../modal/modal.module.scss'
-import ModalContent from '../modal/modalContent'
+import React, { useRef, useContext, useState, useEffect } from "react";
+import ReactDOM from "react-dom";
+import Style from '../content/modal.module.scss';
 
+const ModalContext = React.createContext();
 
-const Modal = (isShowing, hide, id) => {
+// Modal provider. Tager imod children nodes (andre components osv) som props
+export function ModalProvider({ children }) {
+  // Sæt reference til modal og state for context
+  const modalRef = useRef();
+  const [context, setContext] = useState();
 
-     console.log(id);
-    // NEED TO PASS ID OF PARENT DIV FROM HOME COMPONENT INTO THIS FUNCTION 
-    // console.log(id) & console.log(thisId) upon import returns undefined?
+  // make sure re-render is triggered after initial
+  // render so that modalRef exists
+  useEffect(() => {
+    setContext(modalRef.current);
+  }, []);
 
-    if (isShowing.isShowing){
-        return (
-            ReactDOM.createPortal(
-                <React.Fragment>
-                    <div className={modalStyle.modalOverlay} />
-                    <div className={modalStyle.modalWrapper} aria-modal aria-hidden tabIndex={-1} role="dialog">
-                        <div className={modalStyle.modal}>
-                            <div className={modalStyle.modalHeader}>
-                                <button type="button" className={modalStyle.modalCloseButton} data-dismiss="modal" aria-label="Close" onClick={() => hide}>
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <ModalContent></ModalContent>
-                        </div>
-                    </div>
-                </React.Fragment>, document.body
-            )
-        )
-            }
-
-    if (isShowing.isShowing === false) {
-        return (
-            null
-        )
-    }
+ // returner en context.provider med indhold children, og en div, med ref til modalRef
+  return (
+    <div className={Style.container}>
+      <ModalContext.Provider value={context}>{children}</ModalContext.Provider>
+      <div ref={modalRef} />
+    </div>
+  );
 }
 
-export default Modal;
+// Selve modalen som tager imod onClose, children og props og returnere et nyt
+// React portal element
+export function Modal({ onClose, children, ...props }) {
+  const modalNode = useContext(ModalContext);
+
+  return modalNode
+    ? ReactDOM.createPortal(
+        <div className={Style.overlay}>
+          <div className={Style.dialog} {...props}>
+            {children}
+            <button onClick={onClose}>Close</button>
+          </div>
+        </div>,
+        modalNode
+      )
+    : null;
+}
