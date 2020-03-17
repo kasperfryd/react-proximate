@@ -4,13 +4,16 @@ import Style from '../content/content.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar, faCompass } from '@fortawesome/free-regular-svg-icons'
 import { faBars, faUndo, faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons'
+import { Markup } from 'interweave';
+
 
 function WikiArray(props) {
     let wikiArr = [];
 
     const [active, setActive] = useState(0);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    
+    const [modalData, setModalData] = useState();
+
     function ChangeSlide(num) {
         if (num === -1) {
             if (active === 0) {
@@ -30,6 +33,29 @@ function WikiArray(props) {
         }
     }
 
+    const modalAction = async(id) => {
+        
+        const url = `http://en.wikipedia.org/w/api.php?origin=*&action=query&prop=extracts&format=json&exintro=&pageids=${id}`
+        //const url = `https://en.wikipedia.org/?curid=${id}`;
+        try {
+            const req = await fetch(url);
+            const res = await req.json();
+            const data = Object.entries(res);
+            const fData = Object.entries(data[2][1].pages)
+            const mData = {
+               extract: fData['0'][1].extract,
+               title: fData['0'][1].title
+            }
+            setModalData(mData);
+        }
+    
+        catch (error) {
+        console.log(error)
+        }
+
+        setIsModalOpen(true) 
+    }
+
     if (props.apiData && props.apiData.query && props.apiData.query.pages) {
        wikiArr = Object.entries(props.apiData.query.pages).reduce((acc, item) => {
             if (item[1].thumbnail) {
@@ -42,11 +68,12 @@ function WikiArray(props) {
                                 <div className={Style.iconContainer}>
                                     <div className={Style.iconRound}><FontAwesomeIcon className={Style.icon} icon={faStar} /></div>
                                     <div className={Style.iconRound}><FontAwesomeIcon className={Style.icon} icon={faCompass} /></div>
-                                    <div onClick={() => setIsModalOpen(true)} className={Style.iconRound}>
+                                    <div onClick={() => modalAction(item[1].pageid)} className={Style.iconRound}>
                                     <FontAwesomeIcon className={Style.icon} icon={faBars} />
                                     </div>
                                         {isModalOpen && ( <Modal onClose={() => setIsModalOpen(false)}>
-                                        {item[1].pageid}
+                                        <h4>{modalData.title}</h4>
+                                        <Markup content={modalData.extract}></Markup>
                                         </Modal>
                                         )}   
                                     <a href="/" className={Style.iconRound}><FontAwesomeIcon className={Style.icon} icon={faUndo} /></a>

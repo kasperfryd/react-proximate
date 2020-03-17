@@ -32,7 +32,7 @@ export function Modal({ onClose, children, ...props }) {
 
   return modalNode
     ? ReactDOM.createPortal(
-        <div className={Style.overlay}>
+        <div onClick={onClose} className={Style.overlay}>
           <div className={Style.dialog} {...props}>
             {children}
             <button onClick={onClose}>Close</button>
