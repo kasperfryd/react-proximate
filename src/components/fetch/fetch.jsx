@@ -1,22 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState} from 'react';
 
 
 function Fetch() {
-    
-let long;
-let lat;
 
-const [range, setRange] = useState(10)
-const [apiData, setApiData] = useState(null)
+    let long;
+    let lat;
+    const [range, setRange] = useState(10)
+    const [apiData, setApiData] = useState(null)
+
+      
+      const stateChange = (event) => {
+          setRange(event.target.value);
+          console.log(range);
+        }
     
-    const stateChange = (event) => {
-        setRange(event.target.value);
-        console.log(range);
-    }
-    
-    const fetchAll = () => {
-        fetchApiData();
-        fetchGeoData();
+        const fetchAll = () => {
+            fetchApiData();
+            fetchGeoData();
     }
     
     const getLocation = () => {
@@ -37,8 +37,6 @@ const [apiData, setApiData] = useState(null)
             lat
             )
         }
-
-        getLocation();
         
         const fetchGeoData = async () => {
             /*       let geoURL = `https://geocode.xyz/${lat},${long}?json=1'`;
@@ -59,12 +57,13 @@ const [apiData, setApiData] = useState(null)
                 const req = await fetch(url);
                 const res = await req.json();
                 setApiData(res);
+            }
+            
+            catch (error) {
+                console.log(error)
+            }
         }
-        
-        catch (error) {
-            console.log(error)
-        }
+        getLocation()
     }
 
-}
 export default Fetch;

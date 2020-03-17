@@ -72,7 +72,6 @@ function WikiArray(props) {
                                     <FontAwesomeIcon className={Style.icon} icon={faBars} />
                                     </div>
                                         {isModalOpen && ( <Modal onClose={() => setIsModalOpen(false)}>
-                                        <h4>{modalData.title}</h4>
                                         <Markup content={modalData.extract}></Markup>
                                         </Modal>
                                         )}   
@@ -83,8 +82,10 @@ function WikiArray(props) {
                                     <a key={item[1].pageid+1} className={Style.aLinkLeft} href={"http://en.wikipedia.org/?curid=" + item[1].pageid}>Read more |</a>
                                     <a key={item[1].pageid+2}className={Style.aLink} href="/"> Get directions</a>
                                 </div>
+                                <div className={Style.cycleContainer}>
                                 <div onClick={() => ChangeSlide(-1)} className={Style.iconRoundLeft}><FontAwesomeIcon className={Style.icon} icon={faArrowLeft} /></div>
                                 <div onClick={() => ChangeSlide(+1)} className={Style.iconRoundRight}><FontAwesomeIcon className={Style.icon} icon={faArrowRight} /></div>
+                                </div>
                             </div>
                         </div>
                     </ModalProvider>
