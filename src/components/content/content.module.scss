@@ -67,6 +67,7 @@
 
 
 .contentNavigator{
+
 }
 
 .iconRound{
@@ -76,6 +77,11 @@
     background-color: rgba(40,40,40,0.4);
     display:inline-grid;
     margin: 1%;
+}
+
+.iconRound:hover{
+    background-color: darken($color: rgba(40,40,40,0.4), $amount: 25);
+
 }
 
 .iconContainer{

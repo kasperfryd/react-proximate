@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar, faCompass } from '@fortawesome/free-regular-svg-icons'
 import { faBars, faUndo, faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import { Markup } from 'interweave';
+import MapComponent from '../MapComponent/map';
 
 
 function WikiArray(props) {
@@ -31,6 +32,11 @@ function WikiArray(props) {
                 console.log("Reached the top")
             }
         }
+    }
+
+    const modalMap = () => {
+        setModalData(<MapComponent></MapComponent>);
+        setIsModalOpen(true);
     }
 
     const modalAction = async(id) => {
@@ -67,14 +73,16 @@ function WikiArray(props) {
                                 <h2 className={Style.contentHeading}> {item[1].title} </h2>
                                 <div className={Style.iconContainer}>
                                     <div className={Style.iconRound}><FontAwesomeIcon className={Style.icon} icon={faStar} /></div>
-                                    <div className={Style.iconRound}><FontAwesomeIcon className={Style.icon} icon={faCompass} /></div>
+                                    <div onClick={() => modalMap()}  className={Style.iconRound}><FontAwesomeIcon className={Style.icon} icon={faCompass} /></div>
                                     <div onClick={() => modalAction(item[1].pageid)} className={Style.iconRound}>
                                     <FontAwesomeIcon className={Style.icon} icon={faBars} />
                                     </div>
-                                        {isModalOpen && ( <Modal onClose={() => setIsModalOpen(false)}>
-                                        <Markup content={modalData.extract}></Markup>
-                                        </Modal>
-                                        )}   
+                                        { modalData && isModalOpen && 
+                                        ( <Modal onClose={() => setIsModalOpen(false)}> 
+                                        {modalData.extract &&  <Markup content={modalData.extract}></Markup>}
+                                        {!modalData.extract && <MapComponent></MapComponent>}
+                                        </Modal>)
+                                        }
                                     <a href="/" className={Style.iconRound}><FontAwesomeIcon className={Style.icon} icon={faUndo} /></a>
 
                                 </div>

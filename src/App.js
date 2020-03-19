@@ -17,12 +17,12 @@ function App(){
         console.log(range);
       }
   
-      const fetchAll = () => {
+    const fetchAll = () => {
           fetchApiData();
           fetchGeoData();
   }
   
-  const getLocation = () => {
+    const getLocation = () => {
       const success = (pos) => {
           let position = pos.coords;
           lat = position.latitude;
@@ -30,7 +30,7 @@ function App(){
           console.log("lat is " + lat + "long is " + long);
       }
       
-      const error = (error) => {
+    const error = (error) => {
           console.log(error);
       }
       
@@ -41,7 +41,7 @@ function App(){
           )
       }
       
-      const fetchGeoData = async () => {
+    const fetchGeoData = async () => {
           /*       let geoURL = `https://geocode.xyz/${lat},${long}?json=1'`;
           
           try {
@@ -53,7 +53,7 @@ function App(){
           } */
       }
       
-      const fetchApiData = async () => {
+    const fetchApiData = async () => {
           let url = `https://en.wikipedia.org/w/api.php?&format=json&origin=*&action=query&generator=geosearch&prop=coordinates|pageimages&piprop=thumbnail&pithumbsize=2000&ggscoord=${lat}|${long}&ggsradius=${range * 1000}&ggslimit=50`;
           
           try {
