@@ -132,7 +132,7 @@ function WikiArray(props) {
                                         {!modalData.about && !modalData.extract && <MapComponent myPos={myPos} targetPos={targetPos} myLocation={myLocation} targetLocation={item[1].title}></MapComponent>}
                                         </Modal>)
                                         }
-                                    <a href="/" className={Style.iconRound}><FontAwesomeIcon className={Style.icon} icon={faUndo} /></a>
+                                    <a href="/react-proximate" className={Style.iconRound}><FontAwesomeIcon className={Style.icon} icon={faUndo} /></a>
                                 </div>
                                 <div className={Style.linkContainer}>
                                     <a key={item[1].pageid+1} className={Style.aLinkLeft} href={"http://en.wikipedia.org/?curid=" + item[1].pageid}>Read more |</a>
