@@ -40,10 +40,10 @@
 }
 
 .contentHeading{
-    text-shadow: 1px 1px 2px black;
+    text-shadow: 2px 2px 3px black;
     padding-top: 1%;
     padding-left: 3%;
-    font-size: 8rem;
+    font-size: 7.2rem;
     color:white;
     text-decoration: underline;
     width: 70%;
@@ -51,14 +51,16 @@
 }
 
 .aLink{
-    text-shadow: 1px 1px 2px black;
+    text-shadow: 2px 2px 3px black;
     font-size: 1.8rem;
     text-decoration: none;
     color: white;
+    display:inline;
+    cursor: pointer;
 }
 
 .aLinkLeft{
-    text-shadow: 1px 1px 2px black;
+    text-shadow: 2px 2px 3px black;
     padding-left: 3%;
     font-size: 1.8rem;
     text-decoration: none;
@@ -72,6 +74,8 @@
     background-color: rgba(40,40,40,0.4);
     display:inline-grid;
     margin: 1%;
+    cursor: pointer;
+
 }
 
 .iconRound:hover{
@@ -98,7 +102,7 @@
 .cycleContainer{
     width: 100%;
     position: absolute;
-    top: 25%;
+    top: 60%;
 }
 
 .iconRoundLeft:hover{
@@ -109,7 +113,6 @@
     background-color: darken($color: rgba(40,40,40,0.4), $amount: 25);
 }
 
-
 .iconRoundLeft{
     transition: all 0.4s ease;
     display: inline-grid;
@@ -117,8 +120,8 @@
     height: 3rem;
     border-radius: 100px;
     background-color: rgba(40, 40, 40, 0.4);
-    transform: translateX(5vw) translateY(25vh);
-
+    cursor: pointer;
+    margin:2%;
 }
 
 .iconRoundRight{
@@ -128,7 +131,9 @@
     height: 3rem;
     border-radius: 100px;
     background-color: rgba(40, 40, 40, 0.4);
-    transform: translateX(90vw) translateY(25vh);
+    float:right;
+    cursor: pointer;
+    margin:2%;
 }
 
 .modal{
@@ -165,24 +170,200 @@ justify-content: center;
     width: 25vw;
     height: 5vh;
     background-color: white;
-    color:black;
-    margin:auto;
+    color: black;
+    margin: auto;
     font-size: 1.4rem;
-    border-radius: 8px;
-    border:solid 2px #2d66Bd;
+    border-radius: 100px;
+    border: solid 2px #2d66Bd;
     transition: all 0.4s ease;
+    margin-top: 10%;
 }
 
 .bottomButton:hover{
-    border:solid 2px darken($color: #2d66Bd, $amount: 10);
+    border:solid 3px darken($color: #2d66Bd, $amount: 10);
     background-color:#fefefe;
 }
 
 .bottomButton:active{
-    border:solid 2px lighten($color: #2d66Bd, $amount: 25);
+    border:solid 3px lighten($color: #2d66Bd, $amount: 25);
 
 }
 
 .bottomButton:focus{
     outline: 0;
 }
+
+.mainLogo{
+    width: 20%;
+    margin: 2.5%;
+}
+
+
+// About
+.aboutContainer{
+    display: grid;
+    align-content: center;
+    padding:2.5%;
+}
+
+.aboutHeading{
+    font-size: 3rem;
+    margin: 2%;
+}
+
+.aboutContent{
+    margin: 2%;
+}
+
+.aboutList{
+    list-style-type: none;
+
+    a{
+        text-decoration: none;
+    }
+}
+
+// Slider styling by http://danielstern.ca/range.css/#/
+input[type=range] {
+    -webkit-appearance: none;
+    width: 50vw;
+    margin-top: 10%;
+  }
+  input[type=range]:focus {
+    outline: none;
+  }
+  input[type=range]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 8.4px;
+    cursor: pointer;
+    box-shadow: 0px 0px 1px #000000, 0px 0px 0px #0d0d0d;
+    background: #2862a9;
+    border-radius: 24.9px;
+    border: 0.2px solid #010101;
+  }
+  input[type=range]::-webkit-slider-thumb {
+    box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+    border: 1.6px solid #2d66bd;
+    height: 25px;
+    width: 25px;
+    border-radius: 50px;
+    background: #ffffff;
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: -8.5px;
+  }
+  input[type=range]:focus::-webkit-slider-runnable-track {
+    background: #2d6ebe;
+  }
+  input[type=range]::-moz-range-track {
+    width: 100%;
+    height: 8.4px;
+    cursor: pointer;
+    box-shadow: 0px 0px 1px #000000, 0px 0px 0px #0d0d0d;
+    background: #2862a9;
+    border-radius: 24.9px;
+    border: 0.2px solid #010101;
+  }
+  input[type=range]::-moz-range-thumb {
+    box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+    border: 1.6px solid #2d66bd;
+    height: 25px;
+    width: 25px;
+    border-radius: 50px;
+    background: #ffffff;
+    cursor: pointer;
+  }
+  input[type=range]::-ms-track {
+    width: 100%;
+    height: 8.4px;
+    cursor: pointer;
+    background: transparent;
+    border-color: transparent;
+    color: transparent;
+  }
+  input[type=range]::-ms-fill-lower {
+    background: #235694;
+    border: 0.2px solid #010101;
+    border-radius: 49.8px;
+    box-shadow: 0px 0px 1px #000000, 0px 0px 0px #0d0d0d;
+  }
+  input[type=range]::-ms-fill-upper {
+    background: #2862a9;
+    border: 0.2px solid #010101;
+    border-radius: 49.8px;
+    box-shadow: 0px 0px 1px #000000, 0px 0px 0px #0d0d0d;
+  }
+  input[type=range]::-ms-thumb {
+    box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+    border: 1.6px solid #2d66bd;
+    height: 25px;
+    width: 25px;
+    border-radius: 50px;
+    background: #ffffff;
+    cursor: pointer;
+    height: 8.4px;
+  }
+  input[type=range]:focus::-ms-fill-lower {
+    background: #2862a9;
+  }
+  input[type=range]:focus::-ms-fill-upper {
+    background: #2d6ebe;
+  }
+  
+//tablet css
+@media screen and (max-width: 1200px) {
+
+    .contentHeading{
+        font-size: 7.2vw;
+    }
+}
+
+// Mobile css
+@media screen and (max-width: 600px) {
+ 
+    .aLink{
+        font-size: 1.3rem;
+    }
+
+    .aLinkLeft{
+        font-size: 1.3rem;
+    }
+
+    .contentHeading{
+        font-size: 3rem;
+    }
+
+    .topSection{
+        h4{
+            font-size: 2.3rem;
+            color: white;
+            margin-left: 10%;
+        }
+        h2{
+            font-size: 5rem;
+            color: white;
+            margin-left: 5%;
+            margin-top: 10%;
+        }
+    }
+
+    input[type=range] {
+        -webkit-appearance: none;
+        width: 75vw;
+        margin-top: 25%;    
+    }
+
+    .mainLogo{
+        width: 40%;
+    }
+
+    .bottomButton{
+        width: 30vw;
+        height: 6vh;
+        margin-top: 20%;
+    }
+
+    .cycleContainer{
+        top: 75%;
+    }
+  }

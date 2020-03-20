@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar, faCompass } from '@fortawesome/free-regular-svg-icons'
 import { faBars, faUndo, faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import { Markup } from 'interweave';
-import MapComponent from '../MapComponent/map';
+import MapComponent from '../map/map';
 
 
 function WikiArray(props) {
@@ -59,11 +59,11 @@ function WikiArray(props) {
             console.log(error);
         }
 
-        setModalData(<MapComponent></MapComponent>);
+        setModalData(<MapComponent><p>Hello</p></MapComponent>);
         setIsModalOpen(true);
     }
 
-    const modalAction = async(id) => {
+    const modalFetch = async(id) => {
         
         const url = `http://en.wikipedia.org/w/api.php?origin=*&action=query&prop=extracts&format=json&exintro=&pageids=${id}`
 
@@ -86,6 +86,30 @@ function WikiArray(props) {
         setIsModalOpen(true) 
     }
 
+    const modalAbout = () => {
+
+        const modalMsg = {
+                        about: 
+                        <div className={Style.aboutContainer}>
+                            <h3 className={Style.aboutHeading}>About</h3>
+                            <p>Proximate can help you find nearby points of interest, within a 10 km range. Browse through high quality images of all the places near you, and when something peaks your interest, you can get a quick exempt of the place or go straight to the wikipedia site for more info</p>
+                            <p className={Style.aboutContent}>This app would not have been possible without all the awesome work made by:</p>
+                            <div className={Style.aboutContent}>
+                                <ul>
+                                    <li className={Style.aboutList}>Nominatim: <a href="http://nominatim.org/">http://nominatim.org/</a></li>
+                                    <li className={Style.aboutList}>Wikidata: <a href="https://www.wikidata.org/wiki/Wikidata:Main_Page">https://www.wikidata.org/</a></li>
+                                    <li className={Style.aboutList}>OpenStreetMap: <a href="https://www.openstreetmap.org/copyright">https://www.openstreetmap.org/</a></li>
+                                    <li className={Style.aboutList}>React-leaflet: <a href="https://react-leaflet.js.org/" >https://react-leaflet.js.org/</a></li>
+                                    <li className={Style.aboutList}>Leaflet: <a href="https://leafletjs.com/" >https://leafletjs.com/</a></li>
+                                    <li className={Style.aboutList}>FontAwesome: <a href="https://fontawesome.com/" >https://fontawesome.com/</a></li>
+                                </ul>
+                            </div>
+                        </div>,}
+
+        setModalData(modalMsg);
+        setIsModalOpen(true);
+    }
+
     if (props.apiData && props.apiData.query && props.apiData.query.pages) {
        wikiArr = Object.entries(props.apiData.query.pages).reduce((acc, item) => {
             if (item[1].thumbnail) {
@@ -96,22 +120,23 @@ function WikiArray(props) {
                             <div className={Style.contentNavigator}>
                                 <h2 className={Style.contentHeading}> {item[1].title} </h2>
                                 <div className={Style.iconContainer}>
-                                    <div className={Style.iconRound}><FontAwesomeIcon className={Style.icon} icon={faStar} /></div>
+                                    <div onClick={() => modalAbout()} className={Style.iconRound}><FontAwesomeIcon className={Style.icon} icon={faStar} /></div>
                                     <div onClick={() => modalMap(item[1].title)}  className={Style.iconRound}><FontAwesomeIcon className={Style.icon} icon={faCompass} /></div>
-                                    <div onClick={() => modalAction(item[1].pageid)} className={Style.iconRound}>
+                                    <div onClick={() => modalFetch(item[1].pageid)} className={Style.iconRound}>
                                     <FontAwesomeIcon className={Style.icon} icon={faBars} />
                                     </div>
                                         { modalData && isModalOpen && 
                                         ( <Modal onClose={() => setIsModalOpen(false)}> 
-                                        {modalData.extract &&  <Markup content={modalData.extract}></Markup>}
-                                        {!modalData.extract && <MapComponent myPos={myPos} targetPos={targetPos} myLocation={myLocation} targetLocation={item[1].title}></MapComponent>}
+                                        {modalData.about}
+                                        {!modalData.about && modalData.extract &&  <Markup content={modalData.extract}></Markup>}
+                                        {!modalData.about && !modalData.extract && <MapComponent myPos={myPos} targetPos={targetPos} myLocation={myLocation} targetLocation={item[1].title}></MapComponent>}
                                         </Modal>)
                                         }
                                     <a href="/" className={Style.iconRound}><FontAwesomeIcon className={Style.icon} icon={faUndo} /></a>
                                 </div>
                                 <div className={Style.linkContainer}>
                                     <a key={item[1].pageid+1} className={Style.aLinkLeft} href={"http://en.wikipedia.org/?curid=" + item[1].pageid}>Read more |</a>
-                                    <a key={item[1].pageid+2}className={Style.aLink} href="/"> Get directions</a>
+                                    <p key={item[1].pageid+2}className={Style.aLink} onClick={() => modalMap(item[1].title)} curser="pointer"> Get directions</p>
                                 </div>
                                 <div className={Style.cycleContainer}>
                                 <div onClick={() => ChangeSlide(-1)} className={Style.iconRoundLeft}><FontAwesomeIcon className={Style.icon} icon={faArrowLeft} /></div>

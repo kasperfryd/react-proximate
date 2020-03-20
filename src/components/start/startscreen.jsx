@@ -1,6 +1,8 @@
 import React from 'react';
 import Style from '../styles/content.module.scss';
 
+import logoSideWhite from '../images/icons/proximate-side-white.png';
+
 export function StartScreen(props){
     
     if (props.area){
@@ -8,10 +10,11 @@ export function StartScreen(props){
         <>
         <section className={Style.topSection}>
             <nav className={Style.topNav}>
+                <img className={Style.mainLogo} alt="white-proxmate-logo" src={logoSideWhite} />
                 <div className={Style.topIcons}>
                 </div>
             </nav>
-            <h2>{props.area.city} City</h2>
+            <h2>{props.area.city}</h2>
             <h4>Within {props.range} km of you is</h4>
         </section>
 

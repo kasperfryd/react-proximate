@@ -38,9 +38,9 @@
 .icon{
   position: absolute;
   right: 1%;
-  font-size: 2vw;
+  font-size: 1.7rem;
   color: black;
-  top: 1.5%;
+  top: 1%;
   transition: all 0.3s linear;
   width:auto;
 }
@@ -48,4 +48,21 @@
 .icon:hover{
   color: lighten($color: black, $amount: 40);
   transform:scale(1.1);
+}
+
+@media screen and (max-width: 600px) {
+  
+  .dialog{
+    max-width: 100%;
+    min-width: 100%;
+    min-height:80vh;
+    top: 60%;
+    padding-top: 8%;
+    font-size: 1.3rem;
+  }
+
+  .icon{
+    top: 1%;
+    right: 1%;
+  }
 }

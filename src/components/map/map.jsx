@@ -1,11 +1,10 @@
 import React from 'react'
-import { Map, withLeaflet, Marker, Popup, TileLayer, Polyline, Tooltip } from 'react-leaflet'
-import MeasureControlDefault from 'react-leaflet-measure';
+import { Map, Marker, Popup, TileLayer, Polyline, Tooltip } from 'react-leaflet'
 
 // import leaflet and styles
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import './leafletStyles.css';
+import '../styles/leafletStyles.scss';
 
 //Import icons for leaflet
 import icon from 'leaflet/dist/images/marker-icon.png';
@@ -38,20 +37,6 @@ function MapComponent(props) {
         shadowSize: [28, 55],
         shadowAnchor: [10, 50]
     });
-
-    // Set up for measureControl
-    const MeasureControl = withLeaflet(MeasureControlDefault);
-
-    // Set options for measureControl module from 'react-leaflet-measure'
-    const measureOptions = {
-        position: 'topright',
-        primaryLengthUnit: 'meters',
-        secondaryLengthUnit: 'kilometers',
-        primaryAreaUnit: 'sqmeters',
-        secondaryAreaUnit: 'acres',
-        activeColor: '#db4a29',
-        completedColor: '#9b2d14'
-    };
 
     L.Marker.prototype.options.icon = MarkerIcon;
 
@@ -92,7 +77,6 @@ function MapComponent(props) {
                 <Tooltip permanent={true}>{location2}</Tooltip>
                 <Popup>From {location2} to {location1} there are roughly {distance} km</Popup>
             </Marker>
-            <MeasureControl {...measureOptions} />
             <Polyline key={"polyline"} positions={[[lat1, lon1], [lat2, lon2],]} color={'green'} weight={'3'} />
         </Map>
     )
