@@ -1,6 +1,8 @@
 import React, { useRef, useContext, useState, useEffect } from "react";
+import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import ReactDOM from "react-dom";
-import Style from '../content/modal.module.scss';
+import Style from '../styles/modal.module.scss';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const ModalContext = React.createContext();
 
@@ -32,10 +34,10 @@ export function Modal({ onClose, children, ...props }) {
 
   return modalNode
     ? ReactDOM.createPortal(
-        <div onClick={onClose} className={Style.overlay}>
+        <div className={Style.overlay}>
           <div className={Style.dialog} {...props}>
+            <FontAwesomeIcon className={Style.icon} icon={faTimes} onClick={onClose}></FontAwesomeIcon>
             {children}
-            <button onClick={onClose}>Close</button>
           </div>
         </div>,
         modalNode

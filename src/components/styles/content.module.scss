@@ -65,11 +65,6 @@
     color: white;
     }
 
-
-.contentNavigator{
-
-}
-
 .iconRound{
     width: 3rem;
     height: 3rem;
@@ -106,8 +101,17 @@
     top: 25%;
 }
 
+.iconRoundLeft:hover{
+    background-color: darken($color: rgba(40,40,40,0.4), $amount: 25);
+}
+
+.iconRoundRight:hover{
+    background-color: darken($color: rgba(40,40,40,0.4), $amount: 25);
+}
+
 
 .iconRoundLeft{
+    transition: all 0.4s ease;
     display: inline-grid;
     width: 3rem;
     height: 3rem;
@@ -118,16 +122,13 @@
 }
 
 .iconRoundRight{
+    transition: all 0.4s ease;
     display: inline-grid;
     width: 3rem;
     height: 3rem;
     border-radius: 100px;
     background-color: rgba(40, 40, 40, 0.4);
     transform: translateX(90vw) translateY(25vh);
-}
-
-.labelContainer{
-
 }
 
 .modal{
@@ -148,10 +149,6 @@
     display: inline-block;
     float:right;
 }
-
-.topIcons{
-
-    }
 
 .bottomSection{
 display: grid;

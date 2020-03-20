@@ -11,20 +11,24 @@ import './leafletStyles.css';
 import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 
-function MapComponent() {
+function MapComponent(props) {
+
+    console.log(props);
 
     // Set all coordinates
-    const pos2 = { lat: 51.485, lng: -0.02 }
-    const pos1 = { lat: 57.033259, lng: 9.95439 }
+    const pos1 = props.myPos;
+    const pos2 = props.targetPos;
 
-    const lat1 = 51.485;
-    const lon1 = -0.02;
+    const lat1 = pos1.lat;
+    const lon1 = pos1.lon;
 
-    const lat2 = 57.033259;
-    const lon2 = 9.95439;
+    const lat2 = pos2.lat;
+    const lon2 = pos2.lon;
 
-    const location1 = "Aalborg"
-    const location2 = "London"
+    const location1 = props.myLocation;
+    const location2 = props.targetLocation;
+
+
 
     // Set icon options
     let MarkerIcon = L.icon({
