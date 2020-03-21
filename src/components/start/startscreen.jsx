@@ -3,8 +3,10 @@ import Style from '../styles/content.module.scss';
 
 import logoSideWhite from '../images/icons/proximate-side-white.png';
 
+// The default start screen
 export function StartScreen(props){
     
+    // return this if fetch for location was successful
     if (props.area){
     return (
         <>
@@ -29,11 +31,14 @@ export function StartScreen(props){
         </>
     )
 }
+
+// Else return this version without city name
 else{
     return(
         <>
         <section className={Style.topSection}>
             <nav className={Style.topNav}>
+            <img className={Style.mainLogo} alt="white-proxmate-logo" src={logoSideWhite} />
                 <div className={Style.topIcons}>
                 </div>
             </nav>

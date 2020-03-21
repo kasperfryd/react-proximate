@@ -18,6 +18,7 @@
 };
 
 .dialog{
+  overflow:auto;
   animation: movein 0.45s ease alternate;
   //transition: all 0.5s ease;
   background: white;
@@ -35,18 +36,30 @@
   z-index: 1;
 };
 
+b{
+  display:block;
+  font-size: 1.5rem;
+  padding-bottom: 8px;
+} 
+
+p{
+  display:block;
+  padding: 8px;
+  font-size: 1.2rem;
+}
+
 .icon{
   position: absolute;
   right: 1%;
   font-size: 1.7rem;
-  color: black;
-  top: 1%;
+  color: #444444;
+  top: 0.5%;
   transition: all 0.3s linear;
   width:auto;
 }
 
 .icon:hover{
-  color: lighten($color: black, $amount: 40);
+  color: lighten($color: #444444, $amount: 30);
   transform:scale(1.1);
 }
 

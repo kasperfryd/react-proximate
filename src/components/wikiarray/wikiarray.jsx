@@ -7,11 +7,12 @@ import { faBars, faUndo, faArrowLeft, faArrowRight } from '@fortawesome/free-sol
 import { Markup } from 'interweave';
 import MapComponent from '../map/map';
 
-
+// Creates and returns the wikipedia articles 
 function WikiArray(props) {
     console.log(props);
     let wikiArr = [];
 
+    // Set states
     const [active, setActive] = useState(0);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [modalData, setModalData] = useState();
@@ -23,7 +24,7 @@ function WikiArray(props) {
     const myPos = {lat:myLat, lon:myLon};
     const myLocation = props.area.road + " - " + props.area.city + ", " + props.area.suburb;
     
-
+    // Function to change the current article
     function ChangeSlide(num) {
         if (num === -1) {
             if (active === 0) {
@@ -43,6 +44,7 @@ function WikiArray(props) {
         }
     }
 
+    // Function to fetch the current articles gps location
     const modalMap = async(title) => {
         let url = `https://en.wikipedia.org/w/api.php?origin=*&action=query&prop=coordinates&format=json&titles=${title}`
         try {
@@ -59,13 +61,14 @@ function WikiArray(props) {
             console.log(error);
         }
 
-        setModalData(<MapComponent><p>Hello</p></MapComponent>);
+        setModalData(<MapComponent></MapComponent>);
         setIsModalOpen(true);
     }
 
+    // Function to fetch the current articles exempt from wikipedia
     const modalFetch = async(id) => {
         
-        const url = `http://en.wikipedia.org/w/api.php?origin=*&action=query&prop=extracts&format=json&exintro=&pageids=${id}`
+        const url = `https://en.wikipedia.org/w/api.php?origin=*&action=query&prop=extracts&format=json&exintro=&pageids=${id}`
 
         try {
             const req = await fetch(url);
@@ -77,15 +80,16 @@ function WikiArray(props) {
                title: fData['0'][1].title
             }
             setModalData(mData);
+            setIsModalOpen(true) 
         }
-    
+        
         catch (error) {
-        console.log(error)
+            console.log(error)
         }
-
-        setIsModalOpen(true) 
+        
     }
 
+    // Function to return about section, used as a child of modal
     const modalAbout = () => {
 
         const modalMsg = {
@@ -110,6 +114,7 @@ function WikiArray(props) {
         setIsModalOpen(true);
     }
 
+    // If the fetch was successfull, loop through all data, create each page with content, and insert it into an array. 
     if (props.apiData && props.apiData.query && props.apiData.query.pages) {
        wikiArr = Object.entries(props.apiData.query.pages).reduce((acc, item) => {
             if (item[1].thumbnail) {
@@ -125,11 +130,11 @@ function WikiArray(props) {
                                     <div onClick={() => modalFetch(item[1].pageid)} className={Style.iconRound}>
                                     <FontAwesomeIcon className={Style.icon} icon={faBars} />
                                     </div>
-                                        { modalData && isModalOpen && 
-                                        ( <Modal onClose={() => setIsModalOpen(false)}> 
+                                        {modalData && isModalOpen && 
+                                        (<Modal onClose={() => setIsModalOpen(false)}> 
+                                        {!modalData.about && !modalData.extract &&<div><p>From: {myLocation},<br></br> To: {item[1].title}</p><MapComponent myPos={myPos} targetPos={targetPos} myLocation={myLocation} targetLocation={item[1].title}></MapComponent></div>}
+                                        {!modalData.about && modalData.extract && <Markup content={modalData.extract}></Markup>}
                                         {modalData.about}
-                                        {!modalData.about && modalData.extract &&  <Markup content={modalData.extract}></Markup>}
-                                        {!modalData.about && !modalData.extract && <MapComponent myPos={myPos} targetPos={targetPos} myLocation={myLocation} targetLocation={item[1].title}></MapComponent>}
                                         </Modal>)
                                         }
                                     <a href="/react-proximate" className={Style.iconRound}><FontAwesomeIcon className={Style.icon} icon={faUndo} /></a>
@@ -150,8 +155,14 @@ function WikiArray(props) {
             }
             return acc;
         }, [])
+        return wikiArr[active];
     }
-    return wikiArr[active];
+    else{
+        return(
+            <div><h2>Sorry.. No points of interest were found around you. 
+                </h2><p>This app uses Wikidata to get content. If you think something important or interesting is going on around you and it is not already on Wikipedia, consider adding it as an article to Wikipedia yourself.</p></div>
+        )
+    }
 }
 
 export default WikiArray;

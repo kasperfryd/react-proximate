@@ -1,14 +1,14 @@
 import React, { useRef, useContext, useState, useEffect } from "react";
-import { faTimes } from '@fortawesome/free-solid-svg-icons'
+import { faWindowClose } from '@fortawesome/free-solid-svg-icons'
 import ReactDOM from "react-dom";
 import Style from '../styles/modal.module.scss';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const ModalContext = React.createContext();
 
-// Modal provider. Tager imod children nodes (andre components osv) som props
+// Modal provider. Accepts children as props
 export function ModalProvider({ children }) {
-  // Sæt reference til modal og state for context
+  // Set reference
   const modalRef = useRef();
   const [context, setContext] = useState();
 
@@ -18,7 +18,7 @@ export function ModalProvider({ children }) {
     setContext(modalRef.current);
   }, []);
 
- // returner en context.provider med indhold children, og en div, med ref til modalRef
+ // return context provider with value context and children as child.
   return (
     <div className={Style.container}>
       <ModalContext.Provider value={context}>{children}</ModalContext.Provider>
@@ -27,7 +27,7 @@ export function ModalProvider({ children }) {
   );
 }
 
-// Selve modalen som tager imod onClose, children og props og returnere et nyt
+// The modal, accepts onClose function, children optional props
 // React portal element
 export function Modal({ onClose, children, ...props }) {
   const modalNode = useContext(ModalContext);
@@ -36,7 +36,7 @@ export function Modal({ onClose, children, ...props }) {
     ? ReactDOM.createPortal(
         <div className={Style.overlay}>
           <div className={Style.dialog} {...props}>
-            <FontAwesomeIcon className={Style.icon} icon={faTimes} onClick={onClose}></FontAwesomeIcon>
+            <FontAwesomeIcon className={Style.icon} icon={faWindowClose} onClick={onClose}></FontAwesomeIcon>
             {children}
           </div>
         </div>,
