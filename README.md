@@ -9,8 +9,11 @@ A React PWA application that uses wikidata to get nearby points of interest.
     * Locate each poi and place them on a map, for easy navigation.
     * Show distance in km to nearby poi's.
 
-To run the app local on you machine: 
-Download the project and navigate to it, then type:
+To run the app local on you machine:
+Assuming you already have npm installed. 
+Download the project and navigate to it in console.
+Then type the following commands:
+## `npm install`
 ## `npm start`
 
 If you just wanna check out the app, go to: 
