@@ -1,26 +1,26 @@
 {
   "files": {
-    "main.css": "/react-proximate/static/css/main.bfd4e52a.chunk.css",
-    "main.js": "/react-proximate/static/js/main.6fc9b5ad.chunk.js",
-    "main.js.map": "/react-proximate/static/js/main.6fc9b5ad.chunk.js.map",
+    "main.css": "/react-proximate/static/css/main.f689ede7.chunk.css",
+    "main.js": "/react-proximate/static/js/main.11347c4f.chunk.js",
+    "main.js.map": "/react-proximate/static/js/main.11347c4f.chunk.js.map",
     "runtime-main.js": "/react-proximate/static/js/runtime-main.853c86be.js",
     "runtime-main.js.map": "/react-proximate/static/js/runtime-main.853c86be.js.map",
     "static/css/2.7c35e809.chunk.css": "/react-proximate/static/css/2.7c35e809.chunk.css",
-    "static/js/2.0e7a5ace.chunk.js": "/react-proximate/static/js/2.0e7a5ace.chunk.js",
-    "static/js/2.0e7a5ace.chunk.js.map": "/react-proximate/static/js/2.0e7a5ace.chunk.js.map",
+    "static/js/2.642a0dbd.chunk.js": "/react-proximate/static/js/2.642a0dbd.chunk.js",
+    "static/js/2.642a0dbd.chunk.js.map": "/react-proximate/static/js/2.642a0dbd.chunk.js.map",
     "index.html": "/react-proximate/index.html",
-    "precache-manifest.062649370059944af7e47880d0df3d73.js": "/react-proximate/precache-manifest.062649370059944af7e47880d0df3d73.js",
+    "precache-manifest.c9403344b5fa4b9d2eda8701bdd1b9b6.js": "/react-proximate/precache-manifest.c9403344b5fa4b9d2eda8701bdd1b9b6.js",
     "service-worker.js": "/react-proximate/service-worker.js",
     "static/css/2.7c35e809.chunk.css.map": "/react-proximate/static/css/2.7c35e809.chunk.css.map",
-    "static/css/main.bfd4e52a.chunk.css.map": "/react-proximate/static/css/main.bfd4e52a.chunk.css.map",
-    "static/js/2.0e7a5ace.chunk.js.LICENSE.txt": "/react-proximate/static/js/2.0e7a5ace.chunk.js.LICENSE.txt",
+    "static/css/main.f689ede7.chunk.css.map": "/react-proximate/static/css/main.f689ede7.chunk.css.map",
+    "static/js/2.642a0dbd.chunk.js.LICENSE.txt": "/react-proximate/static/js/2.642a0dbd.chunk.js.LICENSE.txt",
     "static/media/proximate-side-white.png": "/react-proximate/static/media/proximate-side-white.c26aa9a9.png"
   },
   "entrypoints": [
     "static/js/runtime-main.853c86be.js",
     "static/css/2.7c35e809.chunk.css",
-    "static/js/2.0e7a5ace.chunk.js",
-    "static/css/main.bfd4e52a.chunk.css",
-    "static/js/main.6fc9b5ad.chunk.js"
+    "static/js/2.642a0dbd.chunk.js",
+    "static/css/main.f689ede7.chunk.css",
+    "static/js/main.11347c4f.chunk.js"
   ]
 }
