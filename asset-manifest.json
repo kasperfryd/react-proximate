@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/react-proximate/static/css/main.5ef92692.chunk.css",
+    "main.css": "/react-proximate/static/css/main.bfd4e52a.chunk.css",
     "main.js": "/react-proximate/static/js/main.6fc9b5ad.chunk.js",
     "main.js.map": "/react-proximate/static/js/main.6fc9b5ad.chunk.js.map",
     "runtime-main.js": "/react-proximate/static/js/runtime-main.853c86be.js",
@@ -9,10 +9,10 @@
     "static/js/2.0e7a5ace.chunk.js": "/react-proximate/static/js/2.0e7a5ace.chunk.js",
     "static/js/2.0e7a5ace.chunk.js.map": "/react-proximate/static/js/2.0e7a5ace.chunk.js.map",
     "index.html": "/react-proximate/index.html",
-    "precache-manifest.2f9aac4b324bacb5b941bfc5ef2c8aad.js": "/react-proximate/precache-manifest.2f9aac4b324bacb5b941bfc5ef2c8aad.js",
+    "precache-manifest.062649370059944af7e47880d0df3d73.js": "/react-proximate/precache-manifest.062649370059944af7e47880d0df3d73.js",
     "service-worker.js": "/react-proximate/service-worker.js",
     "static/css/2.7c35e809.chunk.css.map": "/react-proximate/static/css/2.7c35e809.chunk.css.map",
-    "static/css/main.5ef92692.chunk.css.map": "/react-proximate/static/css/main.5ef92692.chunk.css.map",
+    "static/css/main.bfd4e52a.chunk.css.map": "/react-proximate/static/css/main.bfd4e52a.chunk.css.map",
     "static/js/2.0e7a5ace.chunk.js.LICENSE.txt": "/react-proximate/static/js/2.0e7a5ace.chunk.js.LICENSE.txt",
     "static/media/proximate-side-white.png": "/react-proximate/static/media/proximate-side-white.c26aa9a9.png"
   },
@@ -20,7 +20,7 @@
     "static/js/runtime-main.853c86be.js",
     "static/css/2.7c35e809.chunk.css",
     "static/js/2.0e7a5ace.chunk.js",
-    "static/css/main.5ef92692.chunk.css",
+    "static/css/main.bfd4e52a.chunk.css",
     "static/js/main.6fc9b5ad.chunk.js"
   ]
 }
