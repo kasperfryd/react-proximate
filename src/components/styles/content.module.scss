@@ -367,3 +367,35 @@ input[type=range] {
         top: 60%;
     }
   }
+
+  // Very small mobiles
+  @media screen and (max-width: 340px) {
+    .aLink{
+        font-size: 1rem;
+    }
+
+    .aLinkLeft{
+        font-size: 1rem;
+    }
+
+    
+    
+    .mainLogo{
+        width: 35%;
+    }
+    .contentHeading{
+        font-size: 2rem;
+    }
+    .topSection{
+        h4{
+            font-size: 2.3rem;
+            color: white;
+            margin-left: 10%;
+        }
+        h2{
+            font-size: 3rem;
+            color: white;
+            margin-left: 5%;
+        }
+    }
+}

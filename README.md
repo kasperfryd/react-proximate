@@ -1,6 +1,5 @@
 ## Proximate App
 A React PWA application that uses wikidata to get nearby points of interest.
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Features:
     * Locate points of interest within a custom range (1 to 10 km).
