@@ -12,10 +12,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 To run the app local on you machine: 
 Download the project and navigate to it, then type:
-### `npm start`
+## `npm start`
 
 If you just wanna check out the app, go to: 
-### 'tomgrooves.github.io/react-proximate'
+## 'tomgrooves.github.io/react-proximate'
 
 ## Shoutouts
 The app would not have been possible without all the amazing work of:
