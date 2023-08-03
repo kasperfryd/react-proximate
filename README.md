@@ -17,7 +17,7 @@ Then type the following commands:
 ## `npm start`
 
 If you just wanna check out the app, go to: 
-## 'tomgrooves.github.io/react-proximate'
+## 'kasperfryd.github.io/react-proximate'
 
 ## Shoutouts
 The app would not have been possible without all the amazing work of:
